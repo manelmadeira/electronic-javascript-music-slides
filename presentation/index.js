@@ -14,14 +14,31 @@ import {
   Quote,
   Slide,
   Text,
-  CodePane
+  CodePane,
+  Image
 } from "spectacle";
+
+import OscillatorExample from "./oscillator";
 
 // Import theme
 import createTheme from "spectacle/lib/themes/default";
 
 // Require CSS
 require("normalize.css");
+
+const preload = (imageCollection) => {
+  Object.keys(imageCollection).forEach((key) => {
+    const src = imageCollection[key];
+    const image = new Image();
+    image.src = src;
+  });
+};
+
+const images = {
+  audioNodesImg: require("../assets/audionodes.jpg")
+};
+
+preload(images);
 
 const theme = createTheme({
   primary: "white",
@@ -143,6 +160,91 @@ export default class Presentation extends React.Component {
             `}
           />
         </Slide>
+
+        <Slide>
+          <Heading
+            margin="0 0 50px"
+            size={3}
+            textColor="secondary"
+          >
+            AudioNode
+          </Heading>
+
+          <Text>
+            The building blocks of an AudioContext.
+          </Text>
+
+          <Image
+            src={images.audioNodesImg}
+            margin="60px auto 0"
+          />
+
+          <Text textSize="12px" textColor="#AAA">
+            Source: https://www.html5rocks.com/en/tutorials/webaudio/intro/
+          </Text>
+        </Slide>
+
+        <Slide>
+          <Heading
+            margin="0 0 50px"
+            size={3}
+            textColor="secondary"
+          >
+            OscillatorNode
+          </Heading>
+
+          <CodePane
+            lang="javascript"
+            theme="light"
+            source={`
+              partial interface OscillatorNode {
+                readonly attribute AudioParam frequency;
+                readonly attribute AudioParam detune;
+                void start (optional double when = 0);
+                void stop (optional double when = 0);
+              }
+            `}
+          />
+        </Slide>
+
+        <Slide>
+          <Heading
+            margin="0 0 50px"
+            size={3}
+            textColor="secondary"
+          >
+            AudioParam
+          </Heading>
+
+          <CodePane
+            lang="javascript"
+            theme="light"
+            source={`
+              partial interface AudioParam {
+                readonly attribute float defaultValue;
+                attribute float value;
+                AudioParam setValueAtTime (float value, double startTime);
+                AudioParam linearRampToValueAtTime (float value, double endTime);
+                AudioParam exponentialRampToValueAtTime (float value, double endTime);
+                AudioParam setTargetAtTime (float target, double startTime, float timeConstant);
+                AudioParam setValueCurveAtTime (Float32Array values, double startTime, double duration);
+              }
+            `}
+          />
+        </Slide>
+
+        <Slide>
+          <Heading
+            margin="0 0 50px"
+            size={3}
+            textColor="secondary"
+          >
+            OscillatorNode Demo
+          </Heading>
+
+          <OscillatorExample />
+        </Slide>
+
       </Deck>
     );
   }
