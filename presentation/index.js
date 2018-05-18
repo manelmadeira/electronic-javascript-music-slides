@@ -22,6 +22,8 @@ import OscillatorExample from "./oscillator";
 import BiquadFilterExample from "./biquadfilter";
 import KickNode from "./kick";
 import SnareNode from "./snare";
+import HatsNode from "./hats";
+import BassNode from "./bass";
 
 // Import theme
 import createTheme from "spectacle/lib/themes/default";
@@ -362,12 +364,12 @@ export default class Presentation extends React.Component {
               <audio src={kick} controls loop style={{ marginLeft: "50px" }}/>
             </ListItem>
             <ListItem>
-              TR-808 Snare
-              <audio src={snare} controls loop style={{ marginLeft: "18px" }}/>
-            </ListItem>
-            <ListItem>
               TR-808 Hats
               <audio src={hats} controls loop style={{ marginLeft: "43px" }}/>
+            </ListItem>
+            <ListItem>
+              TR-808 Snare
+              <audio src={snare} controls loop style={{ marginLeft: "18px" }}/>
             </ListItem>
             <ListItem>
               TB-303 Bass
@@ -407,6 +409,39 @@ export default class Presentation extends React.Component {
           />
 
           <KickNode />
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 50px"
+            textColor="secondary"
+          >
+            Hats Sound
+          </Heading>
+
+          <CodePane
+            lang="javascript"
+            theme="light"
+            source={`
+              const noise = ac.createBufferSource();
+              // function that generates random numbers beetween [-1, 1]
+              noise.buffer = noiseBuffer();
+
+              const noiseEnvelope = ac.createGain();
+              noiseEnvelope.gain.value = 1;
+
+              const noiseFilter = ac.createBiquadFilter();
+              noiseFilter.type = "highpass";
+              noiseFilter.frequency.value = 5000;
+
+              noise.connect(noiseEnvelope);
+              noiseEnvelope.connect(noiseFilter);
+              noiseFilter.connect(ac.destination);
+            `}
+          />
+
+          <HatsNode />
         </Slide>
 
         <Slide>
@@ -476,6 +511,75 @@ export default class Presentation extends React.Component {
           />
 
           <SnareNode />
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 50px"
+            textColor="secondary"
+          >
+            Bass Sound
+          </Heading>
+
+          <CodePane
+            lang="javascript"
+            theme="light"
+            source={`
+              const osc = ac.createOscillator();
+              const osc2 = ac.createOscillator();
+
+              osc.type = "sawtooth";
+              osc2.type = "sawtooth";
+
+              const gain = ac.createGain();
+              gain.gain.value = 1;
+
+              const gain2 = ac.createGain();
+              gain2.gain.value = 0.5;
+
+              const envelope = ac.createBiquadFilter();
+              envelope.type = "lowpass";
+              envelope.frequency.value = 300;
+              envelope.Q.value = 25;
+
+              osc.connect(gain);
+              osc2.connect(gain);
+              gain.connect(envelope);
+              envelope.connect(gain2);
+              gain2.connect(ac.destination);
+            `}
+          />
+
+          <Text textSize="1.5rem" margin="30px 0 0">To be continued 👉</Text>
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 50px"
+            textColor="secondary"
+          >
+            Bass Sound
+          </Heading>
+
+          <CodePane
+            lang="javascript"
+            theme="light"
+            source={`
+              // 36 MIDI note equals to a C
+              osc.frequency.value = note2freq(36);
+              osc2.frequency.value = note2freq(36);
+
+              gain.gain.setTargetAtTime(0.0, ac.currentTime, 0.1);
+              envelope.frequency.setTargetAtTime(3000, ac.currentTime, 0.05);
+
+              osc.start();
+              osc.stop(1);
+            `}
+          />
+
+          <BassNode />
         </Slide>
       </Deck>
     );
