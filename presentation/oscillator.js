@@ -229,8 +229,8 @@ class OscillatorExample extends Component {
               id="frequency"
               type="range"
               min="50"
-              max="1000"
-              step="100"
+              max="2000"
+              step="10"
               value={frequency}
               onChange={this.handleFrequencyChange.bind(this)}
             />

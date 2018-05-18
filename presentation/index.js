@@ -19,6 +19,9 @@ import {
 } from "spectacle";
 
 import OscillatorExample from "./oscillator";
+import BiquadFilterExample from "./biquadfilter";
+import KickNode from "./kick";
+import SnareNode from "./snare";
 
 // Import theme
 import createTheme from "spectacle/lib/themes/default";
@@ -34,8 +37,14 @@ const preload = (imageCollection) => {
   });
 };
 
+const kick = require("../assets/kick.wav");
+const snare = require("../assets/snare.wav");
+const hats = require("../assets/hats.wav");
+const bass = require("../assets/bassline.wav");
+
 const images = {
-  audioNodesImg: require("../assets/audionodes.jpg")
+  audioNodesImg: require("../assets/audionodes.jpg"),
+  edmCatsImg: require("../assets/edm-cats.webp")
 };
 
 preload(images);
@@ -239,16 +248,236 @@ export default class Presentation extends React.Component {
             size={3}
             textColor="secondary"
           >
-            OscillatorNode Demo
+            OscillatorNode
+          </Heading>
+
+          <CodePane
+            lang="javascript"
+            theme="light"
+            source={`
+              const ac = new AudioContext();
+              const osc = ac.createOscillator();
+              const gain = ac.createGain();
+
+              osc.type = 'sine';
+              osc.frequency.value = 300;
+
+              gain.gain.value = 0.5;
+
+              osc.connect(gain);
+              gain.connect(ac.destination);
+
+              osc.start();
+            `}
+          />
+        </Slide>
+
+        <Slide>
+          <Heading
+            margin="0 0 50px"
+            size={3}
+            textColor="secondary"
+          >
+            OscillatorNode
           </Heading>
 
           <OscillatorExample />
         </Slide>
 
+        <Slide>
+          <Heading
+            margin="0 0 50px"
+            size={3}
+            textColor="secondary"
+          >
+            BiquadFilterNode
+          </Heading>
+
+          <CodePane
+            lang="javascript"
+            theme="light"
+            source={`
+              const osc = ac.createOscillator();
+              const osc2 = ac.createOscillator();
+              const gain = ac.createGain();
+              const gain2 = ac.createGain();
+              const biquad = ac.createBiquadFilter();
+
+              osc.type = osc2.type = 'sawtooth';
+              osc.frequency.value = osc2.frequency.value = 120;
+              osc2.detune.value = 30;
+
+              biquad.type = "lowpass";
+              biquad.Q.value = 25;
+
+              osc.connect(gain);
+              osc2.connect(gain);
+
+              gain.connect(biquad);
+              biquad.connect(gain2);
+
+              gain2.connect(ac.destination);
+
+              osc.start();
+              osc2.start();
+            `}
+          />
+        </Slide>
+
+        <Slide>
+          <Heading
+            margin="0 0 50px"
+            size={3}
+            textColor="secondary"
+          >
+            BiquadFilterNode
+          </Heading>
+
+          <BiquadFilterExample />
+        </Slide>
+
+        <Slide>
+          <Heading size={3} textColor="secondary">
+            How does this connect with EDM?
+          </Heading>
+
+          <Image
+            src={images.edmCatsImg}
+            margin="60px auto 0"
+          />
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 50px"
+            textColor="secondary"
+          >
+            Some Samples
+          </Heading>
+
+          <List>
+            <ListItem>
+              TR-808 Kick
+              <audio src={kick} controls loop style={{ marginLeft: "50px" }}/>
+            </ListItem>
+            <ListItem>
+              TR-808 Snare
+              <audio src={snare} controls loop style={{ marginLeft: "18px" }}/>
+            </ListItem>
+            <ListItem>
+              TR-808 Hats
+              <audio src={hats} controls loop style={{ marginLeft: "43px" }}/>
+            </ListItem>
+            <ListItem>
+              TB-303 Bass
+              <audio src={bass} controls loop style={{ marginLeft: "47px" }}/>
+            </ListItem>
+          </List>
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 50px"
+            textColor="secondary"
+          >
+            Kick Sound
+          </Heading>
+
+          <CodePane
+            lang="javascript"
+            theme="light"
+            source={`
+              const osc = ac.createOscillator();
+              const gain = ac.createGain();
+
+              osc.connect(this.gain);
+              gain.connect(ac.destination);
+
+              osc.frequency.value = 150;
+              gain.gain.value = 1;
+
+              osc.frequency.exponentialRampToValueAtTime(0.01, 0.5);
+              gain.gain.exponentialRampToValueAtTime(0.01, 0.5);
+
+              osc.start();
+              osc.stop(0.5);
+            `}
+          />
+
+          <KickNode />
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 50px"
+            textColor="secondary"
+          >
+            Snare Sound
+          </Heading>
+
+          <CodePane
+            lang="javascript"
+            theme="light"
+            source={`
+              const noise = ac.createBufferSource();
+              // function that generates random numbers beetween [-1, 1]
+              noise.buffer = noiseBuffer();
+
+              const noiseFilter = ac.createBiquadFilter();
+              noiseFilter.type = "highpass";
+              noiseFilter.frequency.value = 1000;
+              noise.connect(noiseFilter);
+
+              const noiseEnvelope = ac.createGain();
+              noiseFilter.connect(noiseEnvelope);
+
+              noiseEnvelope.connect(ac.destination);
+
+              const osc = ac.createOscillator();
+              osc.type = "triangle";
+              osc.frequency.value = 100;
+
+              const oscEnvelope = ac.createGain();
+              osc.connect(oscEnvelope);
+              oscEnvelope.connect(ac.destination);
+            `}
+          />
+
+          <Text textSize="1.5rem" margin="30px 0 0">To be continued 👉</Text>
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 50px"
+            textColor="secondary"
+          >
+            Snare Sound
+          </Heading>
+
+          <CodePane
+            lang="javascript"
+            theme="light"
+            source={`
+              noiseEnvelope.gain.value = 1;
+              noiseEnvelope.gain.exponentialRampToValueAtTime(0.01, 0.2);
+
+              oscEnvelope.gain.value = 0.7;
+              oscEnvelope.gain.exponentialRampToValueAtTime(0.01, 0.1);
+
+              osc.start();
+              noise.start();
+              osc.stop(0.2);
+              noise.stop(0.2);
+            `}
+          />
+
+          <SnareNode />
+        </Slide>
       </Deck>
     );
   }
 }
-
-/*
-*/

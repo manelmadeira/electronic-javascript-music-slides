@@ -34,6 +34,10 @@ module.exports = {
       loaders: ["style-loader", "raw-loader"],
       include: __dirname
     }, {
+      test: /\.(ogg|wav)$/,
+      loaders: ["file-loader"],
+      include: path.join(__dirname, "assets")
+    }, {
       test: /\.svg$/,
       loader: "url-loader?limit=10000&mimetype=image/svg+xml",
       include: path.join(__dirname, "assets")
@@ -48,6 +52,10 @@ module.exports = {
     }, {
       test: /\.jpg$/,
       loader: "url-loader?mimetype=image/jpg",
+      include: path.join(__dirname, "assets")
+    }, {
+      test: /\.webp$/,
+      loader: "url-loader?mimetype=image/webp",
       include: path.join(__dirname, "assets")
     }]
   }
