@@ -1065,7 +1065,7 @@ babel-runtime@^6.26.0:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
 
-babel-standalone@^6.24.0:
+babel-standalone@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-standalone/-/babel-standalone-6.26.0.tgz#15fb3d35f2c456695815ebf1ed96fe7f015b6886"
 
@@ -3795,13 +3795,17 @@ marked@^0.3.6:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
 
-marksy@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/marksy/-/marksy-5.0.0.tgz#70e9015154994df339528c43511f71540f6559fe"
+marked@^0.3.9:
+  version "0.3.19"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.19.tgz#5d47f709c4c9fc3c216b6d46127280f40b39d790"
+
+marksy@^6.0.2:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/marksy/-/marksy-6.0.3.tgz#6079076e8689b563b61be058942090c7ba1f5d20"
   dependencies:
-    babel-standalone "^6.24.0"
+    babel-standalone "^6.26.0"
     he "^1.1.1"
-    marked "^0.3.6"
+    marked "^0.3.9"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.15"
@@ -4701,6 +4705,12 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
+prismjs@1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.6.0.tgz#118d95fb7a66dba2272e343b345f5236659db365"
+  optionalDependencies:
+    clipboard "^1.5.5"
+
 prismjs@^1.6.0:
   version "1.8.4"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.8.4.tgz#573cc7a14c2c06566e1eca20d813f5ae55db80d2"
@@ -5589,17 +5599,17 @@ spectacle-renderer@^0.0.3:
     puppeteer "^0.12.0"
     yargs "^9.0.1"
 
-spectacle@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/spectacle/-/spectacle-4.0.0.tgz#25ab315a03902f0a0434893eb0913e4534473f4e"
+spectacle@4.2.3:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/spectacle/-/spectacle-4.2.3.tgz#76233ee093b04b443d5e3fc383ed312dd33a09ea"
   dependencies:
     deep-object-diff "^1.0.4"
     emotion "^8.0.8"
     history "^4.6.1"
     lodash "^4.17.4"
-    marksy "^5.0.0"
+    marksy "^6.0.2"
     normalize.css "^7.0.0"
-    prismjs "^1.6.0"
+    prismjs "1.6.0"
     react-emotion "^8.0.8"
     react-live "^1.8.0-2"
     react-redux "^5.0.5"

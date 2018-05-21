@@ -15,7 +15,8 @@ import {
   Slide,
   Text,
   CodePane,
-  Image
+  Image,
+  Link
 } from "spectacle";
 
 import OscillatorExample from "./oscillator";
@@ -24,6 +25,7 @@ import KickNode from "./kick";
 import SnareNode from "./snare";
 import HatsNode from "./hats";
 import BassNode from "./bass";
+import Launchpad from "./launchpad";
 
 // Import theme
 import createTheme from "spectacle/lib/themes/default";
@@ -46,7 +48,9 @@ const bass = require("../assets/bassline.wav");
 
 const images = {
   audioNodesImg: require("../assets/audionodes.jpg"),
-  edmCatsImg: require("../assets/edm-cats.webp")
+  edmCatsImg: require("../assets/edm-cats.webp"),
+  launchpadImg: require("../assets/launchpad.webp"),
+  webMidiApiImg: require("../assets/web-midi-api-caniuse.png")
 };
 
 preload(images);
@@ -580,6 +584,157 @@ export default class Presentation extends React.Component {
           />
 
           <BassNode />
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={2}
+            textColor="secondary"
+          >
+            How can we play this sounds?
+          </Heading>
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 100px"
+            textColor="secondary"
+          >
+            MIDI Instruments
+          </Heading>
+
+          <Image src={images.launchpadImg} />
+        </Slide>
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 30px"
+            textColor="secondary"
+          >
+            Web MIDI API*
+          </Heading>
+
+
+          <Text textSize="1.5rem" margin="0 0 80px">
+            *In draft stage
+          </Text>
+
+          <Image src={images.webMidiApiImg} />
+          <Text textSize="12px" textColor="#AAA" textAlign="left">
+            Source: https://caniuse.com/#search=web%20midi%20api
+          </Text>
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 50px"
+            textColor="secondary"
+          >
+            Web MIDI API
+          </Heading>
+
+          <CodePane
+            lang="javascript"
+            theme="light"
+            source={`
+              navigator.requestMIDIAccess()
+                .then(onMIDISuccess, onMIDIFailure);
+
+              function onMIDIFailure() {
+                // do something with the error
+              }
+
+              function onMIDISuccess(midiAccess) {
+                for (let input of midiAccess.inputs.values()) {
+                  input.onmidimessage = getMIDIMessage;
+                }
+              }
+
+              function getMIDIMessage(midiMessage) {
+                console.log(midiMessage.data);
+              }
+            `}
+          />
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 100px"
+            textColor="secondary"
+          >
+            Web MIDI API
+          </Heading>
+
+          <Launchpad />
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={2}
+            margin="0 0 100px"
+            textColor="secondary"
+          >
+            Web Audio API <br />+<br /> Web MIDI API
+          </Heading>
+
+          <Heading
+            size={5}
+            textColor="secondary"
+            textColor="tertiary"
+          >
+            🙌  Demo  🙌
+          </Heading>
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 100px"
+            textColor="secondary"
+          >
+            Inspiration Talks
+          </Heading>
+
+          <List>
+            <ListItem margin="0 0 50px">
+              <Link textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=Ww0jTafmd_w">
+                Paul Adenot: Elements of Dance Music
+              </Link>
+            </ListItem>
+            <ListItem margin="0 0 50px">
+              <Link textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=cqtBpCqgOgM">
+                Jan Monschke: Using the web for music production and for live performances
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=NL0nb8A8FDM">
+                Matt McKegg: I Play The JavaScript
+              </Link>
+            </ListItem>
+          </List>
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={1}
+            margin="0 0 100px"
+            textColor="secondary"
+          >
+            Thank You!
+          </Heading>
+
+          <Text
+            size={6}
+            margin="0 0 30px"
+          >
+            @maneljmadeira
+          </Text>
+          <Text>
+            manuel.madeira@mindera.com
+          </Text>
         </Slide>
       </Deck>
     );
