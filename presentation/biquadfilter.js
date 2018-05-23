@@ -52,7 +52,7 @@ class BiquadFilterExample extends Component {
     biquadType: "lowpass",
     biquadFrequency: 100,
     biquadGain: 0.5,
-    biquadQ: 25
+    biquadQ: 10
   }
 
   componentWillMount() {
@@ -138,7 +138,7 @@ class BiquadFilterExample extends Component {
   }
 
   createNodes(ac, analyser) {
-    const { frequency, type, gainValue, biquadType } = this.state;
+    const { frequency, type, gainValue, biquadType, biquadQ } = this.state;
 
     const oscNode = ac.createOscillator();
     const oscNode2 = ac.createOscillator();
@@ -155,7 +155,7 @@ class BiquadFilterExample extends Component {
     gainNode.gain.value = gainValue;
 
     biquadNode.type = biquadType;
-    biquadNode.Q.value = 25;
+    biquadNode.Q.value = biquadQ;
 
     oscNode.connect(gainNode);
     oscNode2.connect(gainNode);
@@ -295,7 +295,7 @@ class BiquadFilterExample extends Component {
               id="biquad-q"
               type="range"
               min="0"
-              max="100"
+              max="40"
               step="1"
               value={biquadQ}
               onChange={this.handleQChange.bind(this)}

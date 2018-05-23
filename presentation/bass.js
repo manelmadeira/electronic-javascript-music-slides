@@ -24,7 +24,9 @@ export default class Bass extends Component {
     this.osc2 = this.context.createOscillator();
 
     this.osc.type = "sawtooth";
-    this.osc2.type = "sawtooth";
+    this.osc2.type = "sawtooth"
+
+    this.osc2.detune.value = 20;
 
     this.gain = this.context.createGain();
     this.gain.gain.value = 1;
@@ -56,7 +58,9 @@ export default class Bass extends Component {
     this.lp.frequency.setTargetAtTime(3000, this.context.currentTime, 0.05);
 
     this.osc.start();
+    this.osc2.start();
     this.osc.stop(1);
+    this.osc2.stop(1);
   }
 
   render() {

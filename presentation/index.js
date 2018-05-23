@@ -119,8 +119,12 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide>
+          <Heading size={2} margin="0 0 50px">
+            Why?
+          </Heading>
+
           <Heading size={2}>
-            EDM<br />always been a passion
+            🤔
           </Heading>
         </Slide>
 
@@ -315,6 +319,7 @@ export default class Presentation extends React.Component {
 
               biquad.type = "lowpass";
               biquad.Q.value = 25;
+              biquad.frequency.value = 100;
 
               osc.connect(gain);
               osc2.connect(gain);
@@ -373,7 +378,7 @@ export default class Presentation extends React.Component {
             </ListItem>
             <ListItem>
               TR-808 Snare
-              <audio src={snare} controls loop style={{ marginLeft: "18px" }}/>
+              <audio src={snare} controls loop style={{ marginLeft: "21px" }}/>
             </ListItem>
             <ListItem>
               TB-303 Bass
@@ -398,14 +403,14 @@ export default class Presentation extends React.Component {
               const osc = ac.createOscillator();
               const gain = ac.createGain();
 
-              osc.connect(this.gain);
-              gain.connect(ac.destination);
-
               osc.frequency.value = 150;
               gain.gain.value = 1;
 
               osc.frequency.exponentialRampToValueAtTime(0.01, 0.5);
               gain.gain.exponentialRampToValueAtTime(0.01, 0.5);
+
+              osc.connect(this.gain);
+              gain.connect(ac.destination);
 
               osc.start();
               osc.stop(0.5);
@@ -442,6 +447,11 @@ export default class Presentation extends React.Component {
               noise.connect(noiseEnvelope);
               noiseEnvelope.connect(noiseFilter);
               noiseFilter.connect(ac.destination);
+
+              noiseEnvelope.gain.setTargetAtTime(0.0, ac.currentTime, 0.02);
+
+              noise.start();
+              noise.stop(0.5);
             `}
           />
 
@@ -468,12 +478,12 @@ export default class Presentation extends React.Component {
               const noiseFilter = ac.createBiquadFilter();
               noiseFilter.type = "highpass";
               noiseFilter.frequency.value = 1000;
-              noise.connect(noiseFilter);
 
               const noiseEnvelope = ac.createGain();
-              noiseFilter.connect(noiseEnvelope);
 
-              noiseEnvelope.connect(ac.destination);
+              noise.connect(noiseEnvelope);
+              noiseEnvelope.connect(noiseFilter);
+              noiseFilter.connect(ac.destination);
 
               const osc = ac.createOscillator();
               osc.type = "triangle";
@@ -536,21 +546,23 @@ export default class Presentation extends React.Component {
               osc.type = "sawtooth";
               osc2.type = "sawtooth";
 
+              osc2.detune = 20;
+
               const gain = ac.createGain();
               gain.gain.value = 1;
 
               const gain2 = ac.createGain();
               gain2.gain.value = 0.5;
 
-              const envelope = ac.createBiquadFilter();
-              envelope.type = "lowpass";
-              envelope.frequency.value = 300;
-              envelope.Q.value = 25;
+              const filter = ac.createBiquadFilter();
+              filter.type = "lowpass";
+              filter.frequency.value = 300;
+              filter.Q.value = 25;
 
               osc.connect(gain);
               osc2.connect(gain);
-              gain.connect(envelope);
-              envelope.connect(gain2);
+              gain.connect(filter);
+              filter.connect(gain2);
               gain2.connect(ac.destination);
             `}
           />
@@ -568,6 +580,17 @@ export default class Presentation extends React.Component {
           </Heading>
 
           <CodePane
+            margin="0 0 50px"
+            lang="javascript"
+            theme="light"
+            source={`
+              function note2freq (note) {
+                return Math.pow(2, (note - 69) / 12) * 440;
+              }
+            `}
+          />
+
+          <CodePane
             lang="javascript"
             theme="light"
             source={`
@@ -576,10 +599,12 @@ export default class Presentation extends React.Component {
               osc2.frequency.value = note2freq(36);
 
               gain.gain.setTargetAtTime(0.0, ac.currentTime, 0.1);
-              envelope.frequency.setTargetAtTime(3000, ac.currentTime, 0.05);
+              filter.frequency.setTargetAtTime(3000, ac.currentTime, 0.05);
 
               osc.start();
+              osc2.start();
               osc.stop(1);
+              osc2.stop(1);
             `}
           />
 
@@ -617,7 +642,7 @@ export default class Presentation extends React.Component {
 
 
           <Text textSize="1.5rem" margin="0 0 80px">
-            *In draft stage
+            *in working draft stage
           </Text>
 
           <Image src={images.webMidiApiImg} />
