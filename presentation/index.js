@@ -58,7 +58,7 @@ preload(images);
 const theme = createTheme({
   primary: "white",
   secondary: "#1F2022",
-  tertiary: "#03A9FC",
+  tertiary: "#4183D7",
   quarternary: "#CECECE"
 }, {
   primary: "Montserrat",
@@ -69,39 +69,6 @@ export default class Presentation extends React.Component {
   render() {
     return (
       <Deck transition={["fade"]} transitionDuration={500} theme={theme}>
-        {/* <Slide transition={["zoom"]} bgColor="primary">
-          <Heading size={1} fit caps lineHeight={1} textColor="secondary">
-            Spectacle Boilerplate
-          </Heading>
-          <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
-            open the presentation/index.js file to get started
-          </Text>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="tertiary">
-          <Heading size={6} textColor="primary" caps>Typography</Heading>
-          <Heading size={1} textColor="secondary">Heading 1</Heading>
-          <Heading size={2} textColor="secondary">Heading 2</Heading>
-          <Heading size={3} textColor="secondary">Heading 3</Heading>
-          <Heading size={4} textColor="secondary">Heading 4</Heading>
-          <Heading size={5} textColor="secondary">Heading 5</Heading>
-          <Text size={6} textColor="secondary">Standard text</Text>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
-          <Heading size={6} textColor="secondary" caps>Standard List</Heading>
-          <List>
-            <ListItem>Item 1</ListItem>
-            <ListItem>Item 2</ListItem>
-            <ListItem>Item 3</ListItem>
-            <ListItem>Item 4</ListItem>
-          </List>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-          <BlockQuote>
-            <Quote>Example Quote</Quote>
-            <Cite>Author</Cite>
-          </BlockQuote>
-        </Slide> */}
-
         <Slide>
           <Heading size={1} caps>
             Electronic Javascript Music
@@ -128,6 +95,34 @@ export default class Presentation extends React.Component {
           </Heading>
         </Slide>
 
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 100px"
+            textColor="secondary"
+          >
+            Inspiration
+          </Heading>
+
+          <List>
+            <ListItem margin="0 0 50px">
+              <Link textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=Ww0jTafmd_w">
+                Paul Adenot: Elements of Dance Music
+              </Link>
+            </ListItem>
+            <ListItem margin="0 0 50px">
+              <Link textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=cqtBpCqgOgM">
+                Jan Monschke: Using the web for music production and for live performances
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=NL0nb8A8FDM">
+                Matt McKegg: I Play The JavaScript
+              </Link>
+            </ListItem>
+          </List>
+        </Slide>
+
         <Slide align="center center">
           <Heading
             margin="0 0 50px"
@@ -150,7 +145,7 @@ export default class Presentation extends React.Component {
 
         <Slide>
           <Heading
-            margin="0 0 50px"
+            margin="0 0 20px"
             size={3}
             textColor="secondary"
           >
@@ -158,6 +153,7 @@ export default class Presentation extends React.Component {
           </Heading>
 
           <CodePane
+            textSize="18px"
             lang="javascript"
             theme="light"
             source={`
@@ -205,7 +201,7 @@ export default class Presentation extends React.Component {
 
         <Slide>
           <Heading
-            margin="0 0 50px"
+            margin="0 0 20px"
             size={3}
             textColor="secondary"
           >
@@ -213,6 +209,7 @@ export default class Presentation extends React.Component {
           </Heading>
 
           <CodePane
+            textSize="18px"
             lang="javascript"
             theme="light"
             source={`
@@ -228,7 +225,7 @@ export default class Presentation extends React.Component {
 
         <Slide>
           <Heading
-            margin="0 0 50px"
+            margin="0 0 20px"
             size={3}
             textColor="secondary"
           >
@@ -236,25 +233,26 @@ export default class Presentation extends React.Component {
           </Heading>
 
           <CodePane
+            textSize="16px"
             lang="javascript"
             theme="light"
             source={`
-              partial interface AudioParam {
-                readonly attribute float defaultValue;
-                attribute float value;
-                AudioParam setValueAtTime (float value, double startTime);
-                AudioParam linearRampToValueAtTime (float value, double endTime);
-                AudioParam exponentialRampToValueAtTime (float value, double endTime);
-                AudioParam setTargetAtTime (float target, double startTime, float timeConstant);
-                AudioParam setValueCurveAtTime (Float32Array values, double startTime, double duration);
-              }
+  partial interface AudioParam {
+    readonly attribute float defaultValue;
+    attribute float value;
+    AudioParam setValueAtTime (float value, double startTime);
+    AudioParam linearRampToValueAtTime (float value, double endTime);
+    AudioParam exponentialRampToValueAtTime (float value, double endTime);
+    AudioParam setTargetAtTime (float target, double startTime, float timeConstant);
+    AudioParam setValueCurveAtTime (Float32Array values, double startTime, double duration);
+  }
             `}
           />
         </Slide>
 
         <Slide>
           <Heading
-            margin="0 0 50px"
+            margin="0 0 20px"
             size={3}
             textColor="secondary"
           >
@@ -262,6 +260,7 @@ export default class Presentation extends React.Component {
           </Heading>
 
           <CodePane
+            textSize="18px"
             lang="javascript"
             theme="light"
             source={`
@@ -284,7 +283,7 @@ export default class Presentation extends React.Component {
 
         <Slide>
           <Heading
-            margin="0 0 50px"
+            margin="0 0 20px"
             size={3}
             textColor="secondary"
           >
@@ -296,7 +295,7 @@ export default class Presentation extends React.Component {
 
         <Slide>
           <Heading
-            margin="0 0 50px"
+            margin="0 0 20px"
             size={3}
             textColor="secondary"
           >
@@ -304,33 +303,53 @@ export default class Presentation extends React.Component {
           </Heading>
 
           <CodePane
+            textSize="18px"
             lang="javascript"
             theme="light"
             source={`
-              const osc = ac.createOscillator();
-              const osc2 = ac.createOscillator();
-              const gain = ac.createGain();
-              const gain2 = ac.createGain();
-              const biquad = ac.createBiquadFilter();
+      const osc = ac.createOscillator();
+      const osc2 = ac.createOscillator();
+      const gain = ac.createGain();
+      const gain2 = ac.createGain();
+      const biquad = ac.createBiquadFilter();
 
-              osc.type = osc2.type = 'sawtooth';
-              osc.frequency.value = osc2.frequency.value = 120;
-              osc2.detune.value = 30;
+      osc.type = osc2.type = 'sawtooth';
+      osc.frequency.value = osc2.frequency.value = 120;
+      osc2.detune.value = 30;
 
-              biquad.type = "lowpass";
-              biquad.Q.value = 25;
-              biquad.frequency.value = 100;
+      biquad.type = "lowpass";
+      biquad.Q.value = 25;
+      biquad.frequency.value = 100;
+            `}
+          />
 
-              osc.connect(gain);
-              osc2.connect(gain);
+          <Text textSize="1.5rem" margin="30px 0 0">To be continued 👉</Text>
+        </Slide>
 
-              gain.connect(biquad);
-              biquad.connect(gain2);
+        <Slide>
+          <Heading
+            margin="0 0 20px"
+            size={3}
+            textColor="secondary"
+          >
+            BiquadFilterNode
+          </Heading>
 
-              gain2.connect(ac.destination);
+          <CodePane
+            textSize="18px"
+            lang="javascript"
+            theme="light"
+            source={`
+      osc.connect(gain);
+      osc2.connect(gain);
 
-              osc.start();
-              osc2.start();
+      gain.connect(biquad);
+      biquad.connect(gain2);
+
+      gain2.connect(ac.destination);
+
+      osc.start();
+      osc2.start();
             `}
           />
         </Slide>
@@ -390,13 +409,14 @@ export default class Presentation extends React.Component {
         <Slide>
           <Heading
             size={3}
-            margin="0 0 50px"
+            margin="0 0 20px"
             textColor="secondary"
           >
             Kick Sound
           </Heading>
 
           <CodePane
+            textSize="18px"
             lang="javascript"
             theme="light"
             source={`
@@ -423,35 +443,55 @@ export default class Presentation extends React.Component {
         <Slide>
           <Heading
             size={3}
-            margin="0 0 50px"
+            margin="0 0 20px"
             textColor="secondary"
           >
             Hats Sound
           </Heading>
 
           <CodePane
+            textSize="18px"
             lang="javascript"
             theme="light"
             source={`
-              const noise = ac.createBufferSource();
-              // function that generates random numbers beetween [-1, 1]
-              noise.buffer = noiseBuffer();
+      const noise = ac.createBufferSource();
+      // function that generates random numbers beetween [-1, 1]
+      noise.buffer = noiseBuffer();
 
-              const noiseEnvelope = ac.createGain();
-              noiseEnvelope.gain.value = 1;
+      const noiseEnvelope = ac.createGain();
+      noiseEnvelope.gain.value = 1;
 
-              const noiseFilter = ac.createBiquadFilter();
-              noiseFilter.type = "highpass";
-              noiseFilter.frequency.value = 5000;
+      const noiseFilter = ac.createBiquadFilter();
+      noiseFilter.type = "highpass";
+      noiseFilter.frequency.value = 5000;
+            `}
+          />
 
-              noise.connect(noiseEnvelope);
-              noiseEnvelope.connect(noiseFilter);
-              noiseFilter.connect(ac.destination);
+          <Text textSize="1.5rem" margin="30px 0 0">To be continued 👉</Text>
+        </Slide>
 
-              noiseEnvelope.gain.setTargetAtTime(0.0, ac.currentTime, 0.02);
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 20px"
+            textColor="secondary"
+          >
+            Hats Sound
+          </Heading>
 
-              noise.start();
-              noise.stop(0.5);
+          <CodePane
+            textSize="18px"
+            lang="javascript"
+            theme="light"
+            source={`
+      noise.connect(noiseEnvelope);
+      noiseEnvelope.connect(noiseFilter);
+      noiseFilter.connect(ac.destination);
+
+      noiseEnvelope.gain.setTargetAtTime(0.0, ac.currentTime, 0.02);
+
+      noise.start();
+      noise.stop(0.5);
             `}
           />
 
@@ -461,13 +501,14 @@ export default class Presentation extends React.Component {
         <Slide>
           <Heading
             size={3}
-            margin="0 0 50px"
+            margin="0 0 20px"
             textColor="secondary"
           >
             Snare Sound
           </Heading>
 
           <CodePane
+            textSize="18px"
             lang="javascript"
             theme="light"
             source={`
@@ -484,7 +525,26 @@ export default class Presentation extends React.Component {
               noise.connect(noiseEnvelope);
               noiseEnvelope.connect(noiseFilter);
               noiseFilter.connect(ac.destination);
+            `}
+          />
 
+          <Text textSize="1.5rem" margin="30px 0 0">To be continued 👉</Text>
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 20px"
+            textColor="secondary"
+          >
+            Snare Sound
+          </Heading>
+
+          <CodePane
+            textSize="18px"
+            lang="javascript"
+            theme="light"
+            source={`
               const osc = ac.createOscillator();
               osc.type = "triangle";
               osc.frequency.value = 100;
@@ -501,13 +561,14 @@ export default class Presentation extends React.Component {
         <Slide>
           <Heading
             size={3}
-            margin="0 0 50px"
+            margin="0 0 20px"
             textColor="secondary"
           >
             Snare Sound
           </Heading>
 
           <CodePane
+            textSize="18px"
             lang="javascript"
             theme="light"
             source={`
@@ -530,13 +591,14 @@ export default class Presentation extends React.Component {
         <Slide>
           <Heading
             size={3}
-            margin="0 0 50px"
+            margin="0 0 20px"
             textColor="secondary"
           >
             Bass Sound
           </Heading>
 
           <CodePane
+            textSize="18px"
             lang="javascript"
             theme="light"
             source={`
@@ -553,7 +615,26 @@ export default class Presentation extends React.Component {
 
               const gain2 = ac.createGain();
               gain2.gain.value = 0.5;
+            `}
+          />
 
+          <Text textSize="1.5rem" margin="30px 0 0">To be continued 👉</Text>
+        </Slide>
+
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 20px"
+            textColor="secondary"
+          >
+            Bass Sound
+          </Heading>
+
+          <CodePane
+            textSize="18px"
+            lang="javascript"
+            theme="light"
+            source={`
               const filter = ac.createBiquadFilter();
               filter.type = "lowpass";
               filter.frequency.value = 300;
@@ -573,14 +654,15 @@ export default class Presentation extends React.Component {
         <Slide>
           <Heading
             size={3}
-            margin="0 0 50px"
+            margin="0 0 20px"
             textColor="secondary"
           >
             Bass Sound
           </Heading>
 
           <CodePane
-            margin="0 0 50px"
+            textSize="16px"
+            margin="0 0 20px"
             lang="javascript"
             theme="light"
             source={`
@@ -591,6 +673,7 @@ export default class Presentation extends React.Component {
           />
 
           <CodePane
+            textSize="16px"
             lang="javascript"
             theme="light"
             source={`
@@ -654,13 +737,14 @@ export default class Presentation extends React.Component {
         <Slide>
           <Heading
             size={3}
-            margin="0 0 50px"
+            margin="0 0 20px"
             textColor="secondary"
           >
             Web MIDI API
           </Heading>
 
           <CodePane
+            textSize="18px"
             lang="javascript"
             theme="light"
             source={`
@@ -712,34 +796,6 @@ export default class Presentation extends React.Component {
           >
             🙌  Demo  🙌
           </Heading>
-        </Slide>
-
-        <Slide>
-          <Heading
-            size={3}
-            margin="0 0 100px"
-            textColor="secondary"
-          >
-            Inspiration Talks
-          </Heading>
-
-          <List>
-            <ListItem margin="0 0 50px">
-              <Link textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=Ww0jTafmd_w">
-                Paul Adenot: Elements of Dance Music
-              </Link>
-            </ListItem>
-            <ListItem margin="0 0 50px">
-              <Link textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=cqtBpCqgOgM">
-                Jan Monschke: Using the web for music production and for live performances
-              </Link>
-            </ListItem>
-            <ListItem>
-              <Link textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=NL0nb8A8FDM">
-                Matt McKegg: I Play The JavaScript
-              </Link>
-            </ListItem>
-          </List>
         </Slide>
 
         <Slide>
