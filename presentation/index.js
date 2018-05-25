@@ -1,5 +1,6 @@
 // Import React
 import React from "react";
+import emotion from "react-emotion";
 
 import "./prism.css";
 
@@ -437,7 +438,15 @@ export default class Presentation extends React.Component {
             `}
           />
 
-          <KickNode />
+          <Comparision>
+            <Text>Real Sample:</Text>
+            <audio src={kick} controls loop />
+
+            <Text style={{ fontWeight: 700, margin: "0 20px 0 !important" }}>vs</Text>
+
+            <Text>Web Audio:</Text>
+            <KickNode />
+          </Comparision>
         </Slide>
 
         <Slide>
@@ -495,7 +504,15 @@ export default class Presentation extends React.Component {
             `}
           />
 
-          <HatsNode />
+          <Comparision>
+            <Text>Real Sample:</Text>
+            <audio src={hats} controls loop />
+
+            <Text style={{ fontWeight: 700, margin: "0 20px 0 !important" }}>vs</Text>
+
+            <Text>Web Audio:</Text>
+            <HatsNode />
+          </Comparision>
         </Slide>
 
         <Slide>
@@ -585,7 +602,15 @@ export default class Presentation extends React.Component {
             `}
           />
 
-          <SnareNode />
+          <Comparision>
+            <Text>Real Sample:</Text>
+            <audio src={snare} controls loop />
+
+            <Text style={{ fontWeight: 700, margin: "0 20px 0 !important" }}>vs</Text>
+
+            <Text>Web Audio:</Text>
+            <SnareNode />
+          </Comparision>
         </Slide>
 
         <Slide>
@@ -691,7 +716,15 @@ export default class Presentation extends React.Component {
             `}
           />
 
-          <BassNode />
+          <Comparision>
+            <Text>Real Sample:</Text>
+            <audio src={bass} controls loop />
+
+            <Text style={{ fontWeight: 700, margin: "0 20px 0 !important" }}>vs</Text>
+
+            <Text>Web Audio:</Text>
+            <BassNode />
+          </Comparision>
         </Slide>
 
         <Slide>
@@ -821,3 +854,18 @@ export default class Presentation extends React.Component {
     );
   }
 }
+
+const Comparision = emotion("div")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+
+  p, button {
+    margin: 0 10px 0 0;
+  }
+
+  p {
+    font-size: 24px;
+  }
+`;
