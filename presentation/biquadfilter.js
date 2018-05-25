@@ -104,7 +104,7 @@ class BiquadFilterExample extends Component {
 
     analyser.getFloatFrequencyData(dataArray);
 
-    myCanvas.fillStyle = "#FDF6E4";
+    myCanvas.fillStyle = "#faf8f5";
     myCanvas.fillRect(0, 0, WIDTH, HEIGHT);
 
     const minDecibels = -analyser.minDecibels;

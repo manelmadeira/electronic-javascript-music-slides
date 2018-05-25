@@ -1,6 +1,5 @@
 // Import React
 import React from "react";
-import emotion from "react-emotion";
 
 import "./prism.css";
 
@@ -22,10 +21,10 @@ import {
 
 import OscillatorExample from "./oscillator";
 import BiquadFilterExample from "./biquadfilter";
-import KickNode from "./kick";
-import SnareNode from "./snare";
-import HatsNode from "./hats";
-import BassNode from "./bass";
+import KickNodeAnalyser from "./kick-analyser";
+import HatsNodeAnalyser from "./hats-analyser";
+import SnareNodeAnalyser from "./snare-analyser";
+import BassNodeAnalyser from "./bass-analyser";
 import Launchpad from "./launchpad";
 
 // Import theme
@@ -50,6 +49,7 @@ const bass = require("../assets/bassline.wav");
 const images = {
   audioNodesImg: require("../assets/audionodes.jpg"),
   edmCatsImg: require("../assets/edm-cats.webp"),
+  edmPrydzImg: require("../assets/edm-prydz.webp"),
   launchpadImg: require("../assets/launchpad.webp"),
   webMidiApiImg: require("../assets/web-midi-api-caniuse.png")
 };
@@ -107,17 +107,17 @@ export default class Presentation extends React.Component {
 
           <List>
             <ListItem margin="0 0 50px">
-              <Link textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=Ww0jTafmd_w">
+              <Link target="_blank" textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=Ww0jTafmd_w">
                 Paul Adenot: Elements of Dance Music
               </Link>
             </ListItem>
             <ListItem margin="0 0 50px">
-              <Link textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=cqtBpCqgOgM">
+              <Link target="_blank" textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=cqtBpCqgOgM">
                 Jan Monschke: Using the web for music production and for live performances
               </Link>
             </ListItem>
             <ListItem>
-              <Link textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=NL0nb8A8FDM">
+              <Link target="_blank" textColor="secondary" style="text-decoration:underline;" href="https://www.youtube.com/watch?v=NL0nb8A8FDM">
                 Matt McKegg: I Play The JavaScript
               </Link>
             </ListItem>
@@ -373,7 +373,7 @@ export default class Presentation extends React.Component {
           </Heading>
 
           <Image
-            src={images.edmCatsImg}
+            src={images.edmPrydzImg}
             margin="60px auto 0"
           />
         </Slide>
@@ -437,16 +437,18 @@ export default class Presentation extends React.Component {
               osc.stop(0.5);
             `}
           />
+        </Slide>
 
-          <Comparision>
-            <Text>Real Sample:</Text>
-            <audio src={kick} controls loop />
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 20px"
+            textColor="secondary"
+          >
+            Kick Sound
+          </Heading>
 
-            <Text style={{ fontWeight: 700, margin: "0 20px 0 !important" }}>vs</Text>
-
-            <Text>Web Audio:</Text>
-            <KickNode />
-          </Comparision>
+          <KickNodeAnalyser kick={kick} />
         </Slide>
 
         <Slide>
@@ -503,16 +505,18 @@ export default class Presentation extends React.Component {
       noise.stop(0.5);
             `}
           />
+        </Slide>
 
-          <Comparision>
-            <Text>Real Sample:</Text>
-            <audio src={hats} controls loop />
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 20px"
+            textColor="secondary"
+          >
+            Hats Sound
+          </Heading>
 
-            <Text style={{ fontWeight: 700, margin: "0 20px 0 !important" }}>vs</Text>
-
-            <Text>Web Audio:</Text>
-            <HatsNode />
-          </Comparision>
+          <HatsNodeAnalyser hats={hats} />
         </Slide>
 
         <Slide>
@@ -601,16 +605,18 @@ export default class Presentation extends React.Component {
               noise.stop(0.2);
             `}
           />
+        </Slide>
 
-          <Comparision>
-            <Text>Real Sample:</Text>
-            <audio src={snare} controls loop />
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 20px"
+            textColor="secondary"
+          >
+            Snare Sound
+          </Heading>
 
-            <Text style={{ fontWeight: 700, margin: "0 20px 0 !important" }}>vs</Text>
-
-            <Text>Web Audio:</Text>
-            <SnareNode />
-          </Comparision>
+          <SnareNodeAnalyser snare={snare} />
         </Slide>
 
         <Slide>
@@ -715,16 +721,18 @@ export default class Presentation extends React.Component {
               osc2.stop(1);
             `}
           />
+        </Slide>
 
-          <Comparision>
-            <Text>Real Sample:</Text>
-            <audio src={bass} controls loop />
+        <Slide>
+          <Heading
+            size={3}
+            margin="0 0 20px"
+            textColor="secondary"
+          >
+            Bass Sound
+          </Heading>
 
-            <Text style={{ fontWeight: 700, margin: "0 20px 0 !important" }}>vs</Text>
-
-            <Text>Web Audio:</Text>
-            <BassNode />
-          </Comparision>
+          <BassNodeAnalyser bass={bass} />
         </Slide>
 
         <Slide>
@@ -854,18 +862,3 @@ export default class Presentation extends React.Component {
     );
   }
 }
-
-const Comparision = emotion("div")`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-
-  p, button {
-    margin: 0 10px 0 0;
-  }
-
-  p {
-    font-size: 24px;
-  }
-`;

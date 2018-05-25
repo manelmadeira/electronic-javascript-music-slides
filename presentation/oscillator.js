@@ -78,7 +78,7 @@ class OscillatorExample extends Component {
     analyser.getByteTimeDomainData(dataArray);
     const canvas = document.querySelector("#myCanvas");
 
-    myCanvas.fillStyle = "#FDF6E4";
+    myCanvas.fillStyle = "#faf8f5";
     myCanvas.fillRect(0, 0, WIDTH, HEIGHT);
     myCanvas.lineWidth = 2;
     myCanvas.strokeStyle = "rgb(0, 0, 0)";
