@@ -42,6 +42,14 @@ module.exports = {
     }, {
       test: /\.svg$/,
       loader: "url-loader?limit=10000&mimetype=image/svg+xml"
+    }, {
+      test: /\.(ogg|wav)$/,
+      loaders: ["file-loader"],
+      include: path.join(__dirname, "assets")
+    }, {
+      test: /\.webp$/,
+      loader: "url-loader?mimetype=image/webp",
+      include: path.join(__dirname, "assets")
     }]
   }
 };
