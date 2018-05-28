@@ -1,5 +1,7 @@
 # Electronic Javascript Music Slides
 
+Demo [here](http://electronic-javascript-music-slides.surge.sh/).
+
 ## To run
 
 ```bash
